@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './App.css';
 import generateWordsCloud from './generateWordsCloud';
 
 function App() {
-  const [query, setQuery] = useState('Elon Mask');
-
+  const [query, setQuery] = useState('Elon Musk');
+  const wordsCloudRef = useRef<HTMLDivElement>(null)
   return (
     <div>
       <header>
-
-        <input defaultValue={'Elon Mask'} title='Put tyour cloud Query' onInput={event => setQuery(event.currentTarget.value)} />
+        <input value={query} onInput={event => setQuery(event.currentTarget.value)} />
         <button
-          onClick={async () => await generateWordsCloud(query)}
+          onClick={() => generateWordsCloud(query, wordsCloudRef.current!)}
         >
-          generate words cloud
+          generate
         </button>
-        <div id='wordsclod' className='wordscloud' />
+        <div ref={wordsCloudRef} className='wordscloud' />
       </header>
     </div>
   );
