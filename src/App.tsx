@@ -1,23 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import generateWordsCloud from './generateWordsCloud';
 
 function App() {
+  const [query, setQuery] = useState('Elon Mask');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <header>
+
+        <input defaultValue={'Elon Mask'} title='Put tyour cloud Query' onInput={event => setQuery(event.currentTarget.value)} />
+        <button
+          onClick={async () => await generateWordsCloud(query)}
         >
-          Learn React
-        </a>
+          generate words cloud
+        </button>
+        <div id='wordsclod' className='wordscloud' />
       </header>
     </div>
   );
